@@ -3,10 +3,10 @@ make: all
 all: lfsr
 
 lfsr:
-	g++ lfsr.cpp -o lfsr.out -lgmp
+	g++ lfsr.cpp -o out.out -lgmp
 
 run: clean lfsr
-	./lfsr.out
+	./out.out
 
 clean:
 	rm -f *.out

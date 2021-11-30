@@ -1,3 +1,42 @@
+#include <gmpxx.h>
+#include "lengths.h"
+
+/*
+ * Struct que representa um gerador LFSR.
+ * Membros:
+ *          n    = número de bits dos números que serão gerados
+ *          tape = fita que representa o registrador do método
+ *          mask = máscara que é aplicada à fita a cada rodada
+ */
+typedef struct {
+    length_t n;
+    mpz_t tape;
+    mpz_t mask;
+} lfsr_t;
+
+/*
+ *  Função que inicializa um gerador LFSR.
+ *  Parâmetros:
+ *          gen = ponteiro da struct que representa o gerador
+ *          n   = número de bits dos números que serão gerados
+ */
+void init_lfsr(lfsr_t* gen, length_t n);
+
+/*
+ * Função que gera o próximo número aleatório.
+ * Parâmetros:
+ *          gen = ponteiro da struct que representa o gerador
+ *          res = destino do número que será gerado
+ */
+void next_lfsr(lfsr_t* gen, mpz_t res);
+
+/*
+ *  Função que destrói um gerador LFSR.
+ *  Parâmetros:
+ *          gen = ponteiro da struct que representa o gerador
+ */
+void destroy_lfsr(lfsr_t* gen);
+
 /*
  * Parâmetros do método LFSR para número de bits.
  * Extraído de: https://datacipy.cz/lfsr_table.pdf.
@@ -13,23 +52,6 @@ const int PARAM_512[]  = {512, 510, 507, 504};
 const int PARAM_1024[] = {1024, 1015, 1002, 1001};
 const int PARAM_2048[] = {2048, 2035, 2034, 2029};
 const int PARAM_4096[] = {4096, 4095, 4081, 4069};
-
-/*
- * Enum que define os possíveis números de bits aceitos.
- */
-enum length_t {
-    BITS_40   = 40,
-    BITS_56   = 56,
-    BITS_80   = 80,
-    BITS_128  = 128,
-    BITS_168  = 168,
-    BITS_224  = 224,
-    BITS_256  = 256,
-    BITS_512  = 512,
-    BITS_1024 = 1024,
-    BITS_2048 = 2048,
-    BITS_4096 = 4096,
-};
 
 /*
  * Função auxiliar de escolha de parâmetros dado o número de bits.
