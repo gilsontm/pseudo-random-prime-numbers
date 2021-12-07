@@ -38,25 +38,33 @@ void destroy_lfsr(lfsr_t* gen) {
     mpz_clear(gen->mask);                               //
 }
 
+/*
+ * A função main espera dois inteiros:
+ *          BITS = número de bits dos números que serão gerados
+ *          NUMS = quantidade de números que será gerada
+ * Retorna:
+ *          0    = sucesso                     => imprime os números no terminal
+ *          1    = erro (parâmetros inválidos) => não imprime nada
+ */
 int main(int argc, char* argv[]) {
-    mpz_t res;
-    mpz_init(res);
-    lfsr_t gen;
+    mpz_t res;                                                  // Inicializa variáveis.
+    mpz_init(res);                                              //
+    lfsr_t gen;                                                 //
 
-    if (argc < 3) return 1;
-    unsigned int BITS = strtol(argv[1], NULL, 10);
-    if (errno != 0 || strlen(argv[1]) == 0) return 1;
-    unsigned int NUMS = strtol(argv[2], NULL, 10);
-    if (errno != 0 || strlen(argv[2]) == 0) return 1;
+    if (argc < 3) return 1;                                     // Verifica os argumentos.
+    unsigned int BITS = strtol(argv[1], NULL, 10);              //
+    if (errno != 0 || strlen(argv[1]) == 0) return 1;           //
+    unsigned int NUMS = strtol(argv[2], NULL, 10);              //
+    if (errno != 0 || strlen(argv[2]) == 0) return 1;           //
 
-    if (init_lfsr(&gen, (length_t) BITS) != 0) return 1;
+    if (init_lfsr(&gen, (length_t) BITS) != 0) return 1;        // Inicializa gerador.
 
-    for (int i = 0; i < NUMS; i++) {
-        next_lfsr(&gen, res);
-        std::cout << mpz_get_str(NULL, 10, res) << std::endl;
+    for (int i = 0; i < NUMS; i++) {                            // Gera e imprime "NUMS" números.
+        next_lfsr(&gen, res);                                   //
+        std::cout << mpz_get_str(NULL, 10, res) << std::endl;   //
     }
 
-    destroy_lfsr(&gen);
-    mpz_clear(res);
-    return 0;
+    destroy_lfsr(&gen);                                         // Libera variáveis.
+    mpz_clear(res);                                             //
+    return 0;                                                   //
 }

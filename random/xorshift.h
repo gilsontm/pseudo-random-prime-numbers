@@ -1,6 +1,19 @@
 #include <gmpxx.h>
 #include "lengths.h"
 
+/*
+ * Struct que representa um gerador Xorshift.
+ * Membros:
+ *          n    = número de bits dos números que serão gerados
+ *          tape = fita que representa o estado interno do método
+ *          aux  = é apenas uma variável auxiliar bem grande
+ *          r    = parâmetro do método
+ *          s    = parâmetro do método
+ *          a    = parâmetro do método
+ *          b    = parâmetro do método
+ *          c    = parâmetro do método
+ *          d    = parâmetro do método
+ */
 typedef struct {
     length_t n;
     mpz_t tape;
@@ -13,12 +26,39 @@ typedef struct {
     unsigned int d;
 } xorshift_t;
 
-
+/*
+ *  Função que inicializa um gerador Xorshift.
+ *  Parâmetros:
+ *          gen = ponteiro da struct que representa o gerador
+ *          n   = número de bits dos números que serão gerados
+ *  Retorna:
+ *          0   = sucesso
+ *          1   = erro (parâmetro inválido)
+ */
 int init_xorshift(xorshift_t* gen, length_t n);
+
+/*
+ * Função que gera o próximo número aleatório.
+ * Parâmetros:
+ *          gen = ponteiro da struct que representa o gerador
+ *          res = destino do número que será gerado
+ */
 void next_xorshift(xorshift_t* gen, mpz_t res);
+
+/*
+ *  Função que destrói um gerador Xorshift.
+ *  Parâmetros:
+ *          gen = ponteiro da struct que representa o gerador
+ */
 void destroy_xorshift(xorshift_t* gen);
 
-                                //  r   s   a   b   c   d
+/*
+ * Parâmetros do método Xorshift para número de bits.
+ * Extraído de: https://maths-people.anu.edu.au/~brent/ftp/random/xortable.txt.
+ *
+ * Nome para cada item do vetor:
+ *                                  r   s   a   b   c   d
+ */
 const int XORSHIFT_PARAM_128[]  = { 2,  1, 33, 31, 28, 29};
 const int XORSHIFT_PARAM_256[]  = { 4,  3, 37, 27, 29, 33};
 const int XORSHIFT_PARAM_512[]  = { 8,  1, 37, 26, 29, 34};
