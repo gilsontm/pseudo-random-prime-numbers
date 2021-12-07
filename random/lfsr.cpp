@@ -1,9 +1,8 @@
 #include <iostream>
 #include "lfsr.h"
 
-#define NUMBERS 1000
 
-void init_lfsr(lfsr_t* gen, length_t n) {
+int init_lfsr(lfsr_t* gen, length_t n) {
     gen->n = n;                                         // Inicializa variáveis.
     mpz_init(gen->tape);                                //
     mpz_init(gen->mask);                                //
@@ -12,10 +11,12 @@ void init_lfsr(lfsr_t* gen, length_t n) {
     mpz_setbit(gen->tape, 0);                           // Atribui 1 ao bit menos significativo da fita.
 
     const int * param = get_lfsr_parameters(n);         // Atribui 1 aos bits da máscara de acordo com os parâmetros.
+    if (param == NULL) return 1;                        //
     mpz_setbit(gen->mask, param[0]-1);                  // Note que os parâmetros dependem do número de bits n.
     mpz_setbit(gen->mask, param[1]-1);                  //
     mpz_setbit(gen->mask, param[2]-1);                  //
     mpz_setbit(gen->mask, param[3]-1);                  //
+    return 0;
 }
 
 void next_lfsr(lfsr_t* gen, mpz_t res) {
@@ -37,14 +38,20 @@ void destroy_lfsr(lfsr_t* gen) {
     mpz_clear(gen->mask);                               //
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     mpz_t res;
     mpz_init(res);
-
     lfsr_t gen;
-    init_lfsr(&gen, BITS_4096);
 
-    for (int i = 0; i < NUMBERS; i++) {
+    if (argc < 3) return 1;
+    unsigned int BITS = strtol(argv[1], NULL, 10);
+    if (errno != 0 || strlen(argv[1]) == 0) return 1;
+    unsigned int NUMS = strtol(argv[2], NULL, 10);
+    if (errno != 0 || strlen(argv[2]) == 0) return 1;
+
+    if (init_lfsr(&gen, (length_t) BITS) != 0) return 1;
+
+    for (int i = 0; i < NUMS; i++) {
         next_lfsr(&gen, res);
         std::cout << mpz_get_str(NULL, 10, res) << std::endl;
     }

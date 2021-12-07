@@ -1,12 +1,12 @@
 make: all
 
-all: lfsr
+all: lfsr xorshift
 
 lfsr:
-	g++ lfsr.cpp -o out.out -lgmp
+	g++ lfsr.cpp -o lfsr.out -lgmp
 
-run: clean lfsr
-	./out.out
+xorshift:
+	g++ xorshift.cpp -o xorshift.out -lgmp
 
 clean:
 	rm -f *.out
