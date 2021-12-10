@@ -1,4 +1,3 @@
-#include <iostream>
 #include "lfsr.h"
 
 
@@ -7,8 +6,9 @@ int init_lfsr(lfsr_t* gen, length_t n) {
     mpz_init(gen->tape);                                //
     mpz_init(gen->mask);                                //
 
-    mpz_setbit(gen->tape, n-1);                         // Atribui 1 ao bit mais significativo da fita.
-    mpz_setbit(gen->tape, 0);                           // Atribui 1 ao bit menos significativo da fita.
+    const char * seed = get_seed(n);                    // Atribui seed hexadecimal ao estado da fita.
+    if (strlen(seed) == 0) return 1;                    //
+    mpz_set_str(gen->tape, seed, 16);                   //
 
     const int * param = get_lfsr_parameters(n);         // Atribui 1 aos bits da máscara de acordo com os parâmetros.
     if (param == NULL) return 1;                        //
@@ -36,35 +36,4 @@ void next_lfsr(lfsr_t* gen, mpz_t res) {
 void destroy_lfsr(lfsr_t* gen) {
     mpz_clear(gen->tape);                               // Libera variáveis.
     mpz_clear(gen->mask);                               //
-}
-
-/*
- * A função main espera dois inteiros:
- *          BITS = número de bits dos números que serão gerados
- *          NUMS = quantidade de números que será gerada
- * Retorna:
- *          0    = sucesso                     => imprime os números no terminal
- *          1    = erro (parâmetros inválidos) => não imprime nada
- */
-int main(int argc, char* argv[]) {
-    mpz_t res;                                                  // Inicializa variáveis.
-    mpz_init(res);                                              //
-    lfsr_t gen;                                                 //
-
-    if (argc < 3) return 1;                                     // Verifica os argumentos.
-    unsigned int BITS = strtol(argv[1], NULL, 10);              //
-    if (errno != 0 || strlen(argv[1]) == 0) return 1;           //
-    unsigned int NUMS = strtol(argv[2], NULL, 10);              //
-    if (errno != 0 || strlen(argv[2]) == 0) return 1;           //
-
-    if (init_lfsr(&gen, (length_t) BITS) != 0) return 1;        // Inicializa gerador.
-
-    for (int i = 0; i < NUMS; i++) {                            // Gera e imprime "NUMS" números.
-        next_lfsr(&gen, res);                                   //
-        std::cout << mpz_get_str(NULL, 10, res) << std::endl;   //
-    }
-
-    destroy_lfsr(&gen);                                         // Libera variáveis.
-    mpz_clear(res);                                             //
-    return 0;                                                   //
 }

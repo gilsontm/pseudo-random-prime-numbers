@@ -1,5 +1,5 @@
 #include <gmpxx.h>
-#include "lengths.h"
+#include "seed.h"
 
 /*
  * Struct que representa um gerador Xorshift.

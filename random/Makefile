@@ -3,10 +3,10 @@ make: all
 all: lfsr xorshift
 
 lfsr:
-	g++ lfsr.cpp -o lfsr.out -lgmp
+	g++ lfsr_test.cpp -o lfsr.out -lgmp
 
 xorshift:
-	g++ xorshift.cpp -o xorshift.out -lgmp
+	g++ xorshift_test.cpp -o xorshift.out -lgmp
 
 clean:
 	rm -f *.out
