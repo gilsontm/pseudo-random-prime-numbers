@@ -1,19 +1,19 @@
 #include <iostream>
-#include "miller_rabin.h"
+#include "fermat.h"
 #include "../xorshift.cpp"
 
 /*
- * Gera números aleatórios usando Xorshift, e testa-os usando Miller-Rabin, até que um deles seja primo.
+ * Gera números aleatórios usando Xorshift, e testa-os usando Fermat, até que um deles seja primo.
  * Então, escreve o número primo no argumento "res" e retorna.
- * A probabilidade de retornar um número não-primo é de 1/(4^k), e escolheu-se k = 40.
+ * O teste de Fermat é executado k vezes, onde escolheu-se k = 100.
  * Parâmetros:
- *          gen = gerador Xorshift já inicializado
+ *          gen = gerador xorshift já inicializado
  *          res = variável onde será escrito o número primo gerado
  */
 void next_prime_xorshift(xorshift_t* gen, mpz_t res) {
     do {                                                        // Gera números aleatórios até que um deles seja primo.
         next_xorshift(gen, res);                                // Termina quando gerar um número primo.
-    } while (!is_prime_miller_rabin(res, 40));                  // O resultado é colocado na variável "res".
+    } while (!is_prime_fermat(res, 100));                       // O resultado é colocado na variável "res".
 }
 
 /*
