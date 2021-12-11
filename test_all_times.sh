@@ -1,14 +1,14 @@
 #!/bin/bash
 
 LFSR_COMPILED="random/lfsr.out"
-LFSR_FERMAT_COMPILED="random/prime/fermat_lfsr.out"
-LFSR_MILLER_RABIN_COMPILED="random/prime/miller_rabin_lfsr.out"
 XORSHIFT_COMPILED="random/xorshift.out"
-XORSHIFT_FERMAT_COMPILED="random/prime/fermat_xorshift.out"
-XORSHIFT_MILLER_RABIN_COMPILED="random/prime/miller_rabin_xorshift.out"
+FERMAT_LFSR_COMPILED="random/prime/fermat_lfsr.out"
+FERMAT_XORSHIFT_COMPILED="random/prime/fermat_xorshift.out"
+MILLER_RABIN_LFSR_COMPILED="random/prime/miller_rabin_lfsr.out"
+MILLER_RABIN_XORSHIFT_COMPILED="random/prime/miller_rabin_xorshift.out"
 
-PRIME_NUMBERS=100
-PSEUDORANDOM_NUMBERS=10000
+PRIME_NUMBERS=30
+PSEUDORANDOM_NUMBERS=1000000
 LOG_FILE="log.txt"
 
 make -C random/prime clean
@@ -68,98 +68,98 @@ echo -n "4096 bits ==> " >> $LOG_FILE
 
 echo "Teste de primalidade de Fermat (com LFSR)" >> $LOG_FILE
 echo -n "  40 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 40   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 40   $PRIME_NUMBERS
 echo -n "  56 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 56   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 56   $PRIME_NUMBERS
 echo -n "  80 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 80   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 80   $PRIME_NUMBERS
 echo -n " 128 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 128  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 128  $PRIME_NUMBERS
 echo -n " 168 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 168  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 168  $PRIME_NUMBERS
 echo -n " 224 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 224  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 224  $PRIME_NUMBERS
 echo -n " 256 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 256  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 256  $PRIME_NUMBERS
 echo -n " 512 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 512  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 512  $PRIME_NUMBERS
 echo -n "1024 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 1024 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 1024 $PRIME_NUMBERS
 echo -n "2048 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 2048 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 2048 $PRIME_NUMBERS
 echo -n "4096 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_FERMAT_COMPILED 4096 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_LFSR_COMPILED 4096 $PRIME_NUMBERS
 
 echo "Teste de primalidade de Fermat (com Xorshift)" >> $LOG_FILE
 echo -n "  40 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 40   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 40   $PRIME_NUMBERS
 echo -n "  56 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 56   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 56   $PRIME_NUMBERS
 echo -n "  80 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 80   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 80   $PRIME_NUMBERS
 echo -n " 128 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 128  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 128  $PRIME_NUMBERS
 echo -n " 168 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 168  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 168  $PRIME_NUMBERS
 echo -n " 224 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 224  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 224  $PRIME_NUMBERS
 echo -n " 256 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 256  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 256  $PRIME_NUMBERS
 echo -n " 512 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 512  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 512  $PRIME_NUMBERS
 echo -n "1024 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 1024 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 1024 $PRIME_NUMBERS
 echo -n "2048 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 2048 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 2048 $PRIME_NUMBERS
 echo -n "4096 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_FERMAT_COMPILED 4096 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $FERMAT_XORSHIFT_COMPILED 4096 $PRIME_NUMBERS
 
 echo "Teste de primalidade de Miller-Rabin (com LFSR)" >> $LOG_FILE
 echo -n "  40 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 40   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 40   $PRIME_NUMBERS
 echo -n "  56 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 56   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 56   $PRIME_NUMBERS
 echo -n "  80 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 80   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 80   $PRIME_NUMBERS
 echo -n " 128 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 128  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 128  $PRIME_NUMBERS
 echo -n " 168 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 168  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 168  $PRIME_NUMBERS
 echo -n " 224 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 224  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 224  $PRIME_NUMBERS
 echo -n " 256 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 256  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 256  $PRIME_NUMBERS
 echo -n " 512 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 512  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 512  $PRIME_NUMBERS
 echo -n "1024 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 1024 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 1024 $PRIME_NUMBERS
 echo -n "2048 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 2048 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 2048 $PRIME_NUMBERS
 echo -n "4096 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $LFSR_MILLER_RABIN_COMPILED 4096 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_LFSR_COMPILED 4096 $PRIME_NUMBERS
 
 echo "Teste de primalidade de Miller-Rabin (com Xorshift)" >> $LOG_FILE
 echo -n "  40 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 40   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 40   $PRIME_NUMBERS
 echo -n "  56 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 56   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 56   $PRIME_NUMBERS
 echo -n "  80 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 80   $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 80   $PRIME_NUMBERS
 echo -n " 128 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 128  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 128  $PRIME_NUMBERS
 echo -n " 168 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 168  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 168  $PRIME_NUMBERS
 echo -n " 224 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 224  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 224  $PRIME_NUMBERS
 echo -n " 256 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 256  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 256  $PRIME_NUMBERS
 echo -n " 512 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 512  $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 512  $PRIME_NUMBERS
 echo -n "1024 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 1024 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 1024 $PRIME_NUMBERS
 echo -n "2048 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 2048 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 2048 $PRIME_NUMBERS
 echo -n "4096 bits ==> " >> $LOG_FILE
-/usr/bin/time -f "%es" -a -o $LOG_FILE $XORSHIFT_MILLER_RABIN_COMPILED 4096 $PRIME_NUMBERS
+/usr/bin/time -f "%es" -a -o $LOG_FILE $MILLER_RABIN_XORSHIFT_COMPILED 4096 $PRIME_NUMBERS
 
 echo "$(cat $LOG_FILE)"

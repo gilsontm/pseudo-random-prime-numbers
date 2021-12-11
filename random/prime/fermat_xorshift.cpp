@@ -5,7 +5,7 @@
 /*
  * Gera números aleatórios usando Xorshift, e testa-os usando Fermat, até que um deles seja primo.
  * Então, escreve o número primo no argumento "res" e retorna.
- * O teste de Fermat é executado k vezes, onde escolheu-se k = 100.
+ * O teste de Fermat é executado k vezes, onde escolheu-se k = 40.
  * Parâmetros:
  *          gen = gerador xorshift já inicializado
  *          res = variável onde será escrito o número primo gerado
@@ -13,7 +13,7 @@
 void next_prime_xorshift(xorshift_t* gen, mpz_t res) {
     do {                                                        // Gera números aleatórios até que um deles seja primo.
         next_xorshift(gen, res);                                // Termina quando gerar um número primo.
-    } while (!is_prime_fermat(res, 100));                       // O resultado é colocado na variável "res".
+    } while (!is_prime_fermat(res, 40));                        // O resultado é colocado na variável "res".
 }
 
 /*
